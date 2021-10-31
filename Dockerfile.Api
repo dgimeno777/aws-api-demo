@@ -1,0 +1,23 @@
+FROM amazonlinux:latest
+
+# Update image and install dependencies
+RUN yum update -y\
+ && yum install -y shadow-utils zlib zlib-devel bzip2-devel openssl-devel sqlite-devel readline-devel\
+ && amazon-linux-extras install python3.8
+
+# Install poetry
+RUN pip3.8 install --upgrade pip && pip3.8 install poetry
+
+# Add non-root user
+RUN useradd docker
+USER docker
+
+# Set workdir
+WORKDIR /home/docker
+
+# Copy poetry files
+COPY poetry.lock poetry.toml pyproject.toml ./
+RUN poetry install
+
+# Copy project files
+COPY ./api/ ./api/
