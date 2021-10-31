@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "aws_api_repo" {
-  name = "aws-api-repo-${local.resource_name_suffix}"
+  name = "aws-api-repo-${local.resource_name_suffix}/api"
   image_scanning_configuration {
     scan_on_push = true
   }

@@ -2,7 +2,14 @@ version: "3.8"
 
 services:
   unittest:
+    container_name: aws-api-demo-test
     build:
       dockerfile: Dockerfile.Api
       context: .
     entrypoint: poetry run pytest
+  api:
+    container_name: aws-api-demo
+    image: ${ECR_REPO_BASE_URL}/api
+    build:
+      dockerfile: Dockerfile.Api
+      context: .
