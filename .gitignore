@@ -139,3 +139,4 @@ dmypy.json
 
 # Terraform
 .terraform/
+terraform.tfvars
