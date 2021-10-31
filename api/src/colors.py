@@ -1,8 +1,9 @@
+import random
 from enum import Enum
-from random import randrange
 
 
 class Color(Enum):
+    """ Represents a color """
     RED = "RED"
     WHITE = "WHITE"
     BLUE = "BLUE"
@@ -10,4 +11,8 @@ class Color(Enum):
 
 
 def get_random_color() -> Color:
-    print(randrange(10))
+    """
+    Gets a random Color enum member
+    :return: a random Color enum member
+    """
+    return random.choice(list(Color))
