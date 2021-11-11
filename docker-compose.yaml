@@ -13,3 +13,5 @@ services:
     build:
       dockerfile: Dockerfile.Api
       context: .
+    ports:
+      - "9000:8080"
