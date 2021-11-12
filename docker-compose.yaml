@@ -9,6 +9,7 @@ services:
     entrypoint: poetry run pytest
   api:
     container_name: aws-api-demo
+    platform: linux/amd64
     image: ${ECR_REPO_BASE_URL}/api
     build:
       dockerfile: Dockerfile.Api

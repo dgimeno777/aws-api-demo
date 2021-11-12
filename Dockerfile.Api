@@ -9,7 +9,7 @@ RUN yum update -y\
 RUN pip3.8 install --upgrade pip && pip3.8 install poetry
 
 # Copy Lambda RIE (runtime interface emulator)
-ADD ./aws/lambda/aws-lambda-rie-arm64 /usr/local/bin/aws-lambda-rie
+ADD ./aws/lambda/aws-lambda-rie /usr/local/bin/aws-lambda-rie
 
 # Add non-root user
 RUN useradd docker
@@ -19,7 +19,7 @@ USER docker
 WORKDIR /home/docker
 
 # Copy Lambda entry script
-COPY ./aws/lambda/entry_script.sh ./
+ADD ./aws/lambda/entry_script.sh ./
 
 # Copy poetry files
 COPY poetry.lock poetry.toml pyproject.toml ./
@@ -27,6 +27,11 @@ RUN poetry install
 
 # Copy project files
 COPY ./api/ ./api/
+
+# Add access for Lambda execution
+USER root
+RUN chmod -R 755 ./
+USER docker
 
 # Set Entrypoint and command
 ENTRYPOINT [ "./entry_script.sh" ]
