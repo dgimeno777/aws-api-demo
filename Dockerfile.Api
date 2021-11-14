@@ -35,4 +35,3 @@ USER docker
 
 # Set Entrypoint and command
 ENTRYPOINT [ "./entry_script.sh" ]
-CMD [ "api.lambda_handler.get_random_color.get_random_color_lambda_handler" ]
