@@ -7,6 +7,26 @@ resource "aws_ecr_repository" "aws_api_repo" {
     encryption_type = "AES256"
   }
   tags = {
-    (var.tag_project_key): local.tag_project_value
+    (var.tag_project_key) : local.tag_project_value
   }
+}
+
+resource "aws_ecr_lifecycle_policy" "aws_api_repo_delete_untagged" {
+  repository = aws_ecr_repository.aws_api_repo.name
+  policy = jsonencode({
+    rules : [
+      {
+        rulePriority : 1,
+        selection : {
+          tagStatus : "untagged",
+          countType : "sinceImagePushed",
+          countUnit : "days",
+          countNumber : 1
+        },
+        action : {
+          type : "expire"
+        }
+      }
+    ]
+  })
 }

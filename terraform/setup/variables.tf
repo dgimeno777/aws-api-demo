@@ -1,10 +1,10 @@
 locals {
   resource_name_suffix = terraform.workspace
-  tag_project_value = "aws-api-demo"
+  tag_project_value    = "aws-api-demo"
 }
 
 variable "tag_project_key" {
-  type = string
+  type        = string
   description = "The project tag key"
-  default = "Project"
+  default     = "Project"
 }
