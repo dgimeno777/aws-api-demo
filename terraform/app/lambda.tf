@@ -29,7 +29,7 @@ resource "aws_lambda_function" "get_random_color" {
 }
 
 resource "aws_cloudwatch_log_group" "get_random_color" {
-  name = "/aws/lambda/${aws_lambda_function.get_random_color.function_name}"
+  name              = "/aws/lambda/${aws_lambda_function.get_random_color.function_name}"
   retention_in_days = 30
 }
 
@@ -44,6 +44,6 @@ resource "aws_lambda_function" "is_color_valid" {
 }
 
 resource "aws_cloudwatch_log_group" "is_color_valid" {
-  name = "/aws/lambda/${aws_lambda_function.is_color_valid.function_name}"
+  name              = "/aws/lambda/${aws_lambda_function.is_color_valid.function_name}"
   retention_in_days = 30
 }

@@ -31,22 +31,22 @@ resource "aws_lambda_permission" "get_random_color" {
 }
 
 resource "aws_apigatewayv2_integration" "is_color_valid" {
-  api_id           = aws_apigatewayv2_api.aws_api_demo.id
-  integration_type = "AWS_PROXY"
-  integration_uri = aws_lambda_function.is_color_valid.invoke_arn
+  api_id             = aws_apigatewayv2_api.aws_api_demo.id
+  integration_type   = "AWS_PROXY"
+  integration_uri    = aws_lambda_function.is_color_valid.invoke_arn
   integration_method = "POST"
 }
 
 resource "aws_apigatewayv2_route" "is_color_valid" {
   api_id    = aws_apigatewayv2_api.aws_api_demo.id
   route_key = "GET /is_color_valid"
-  target = "integrations/${aws_apigatewayv2_integration.is_color_valid.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.is_color_valid.id}"
 }
 
 resource "aws_lambda_permission" "is_color_valid" {
-  statement_id = "AllowExecutionFromAPIGateway"
-  action = "lambda:InvokeFunction"
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.is_color_valid.function_name
-  principal = "apigateway.amazonaws.com"
-  source_arn = "${aws_apigatewayv2_api.aws_api_demo.execution_arn}/*/*"
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.aws_api_demo.execution_arn}/*/*"
 }
